@@ -1,13 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import DeclarativeBase
 
 # Configuración de la conexión a la base de datos
-DATABASE_URL = "postgresql://postgres:admin@localhost:5432/testBackup"
+DATABASE_URL = "postgresql://postgres:ilomilo@localhost:5432/Hotel"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+class Base (DeclarativeBase):
+    pass
 
 def get_db():
     db = SessionLocal()
@@ -18,3 +19,5 @@ def get_db():
 
 # Crear las tablas en la base de datos si no existen
 Base.metadata.create_all(bind=engine)
+
+
