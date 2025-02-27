@@ -1,10 +1,7 @@
 # coding: utf-8
 from sqlalchemy import Boolean, CheckConstraint, Column, DateTime, ForeignKey, Index, Integer, Numeric, String, Text, text
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
-metadata = Base.metadata
+from conexion import Base
 
 
 class Cliente(Base):
