@@ -140,6 +140,124 @@ def elimina_reservacion(reservacion_id):
     else:
         print(f"No se encontró la reservación con ID {reservacion_id}")
         
+def muestra_eventos():
+    eventos = session.query(Evento).all()
+    for evento in eventos:
+        print(evento.id_evento, evento.nombre, evento.descripcion)
+
+def muestra_evento_por_id(evento_id):
+    evento = session.get(Evento, evento_id)
+    if evento:
+        print(evento.id_evento, evento.nombre, evento.descripcion)
+    else:
+        print(f"No se encontró el evento con ID {evento_id}")
+
+def agrega_evento(nombre, descripcion):
+    nuevo_evento = Evento(nombre=nombre, descripcion=descripcion)
+    session.add(nuevo_evento)
+    session.commit()
+    print(f"Evento {nombre} agregado exitosamente.")
+
+def actualiza_evento(evento_id, nombre=None, descripcion=None):
+    evento = session.get(Evento, evento_id)
+    if evento:
+        if nombre:
+            evento.nombre = nombre
+        if descripcion:
+            evento.descripcion = descripcion
+        session.commit()
+        print(f"Evento con ID {evento_id} actualizado exitosamente.")
+    else:
+        print(f"No se encontró el evento con ID {evento_id}")
+
+def elimina_evento(evento_id):
+    evento = session.get(Evento, evento_id)
+    if evento:
+        session.delete(evento)
+        session.commit()
+        print(f"Evento con ID {evento_id} eliminado exitosamente.")
+    else:
+        print(f"No se encontró el evento con ID {evento_id}")
+        
+def muestra_facturas():
+    facturas = session.query(Facturacion).all()
+    for factura in facturas:
+        print(factura.id_factura, factura.id_reservacion, factura.monto_total, factura.moneda, factura.fecha_pago)
+
+def muestra_factura_por_id(factura_id):
+    factura = session.get(Facturacion, factura_id)
+    if factura:
+        print(factura.id_factura, factura.id_reservacion, factura.monto_total, factura.moneda, factura.fecha_pago)
+    else:
+        print(f"No se encontró la factura con ID {factura_id}")
+
+def agrega_factura(id_reservacion, monto_total, moneda):
+    nueva_factura = Facturacion(id_reservacion=id_reservacion, monto_total=monto_total, moneda=moneda)
+    session.add(nueva_factura)
+    session.commit()
+    print(f"Factura para la reservación {id_reservacion} agregada exitosamente.")
+
+def actualiza_factura(factura_id, id_reservacion=None, monto_total=None, moneda=None):
+    factura = session.get(Facturacion, factura_id)
+    if factura:
+        if id_reservacion:
+            factura.id_reservacion = id_reservacion
+        if monto_total:
+            factura.monto_total = monto_total
+        if moneda:
+            factura.moneda = moneda
+        session.commit()
+        print(f"Factura con ID {factura_id} actualizada exitosamente.")
+    else:
+        print(f"No se encontró la factura con ID {factura_id}")
+
+def elimina_factura(factura_id):
+    factura = session.get(Facturacion, factura_id)
+    if factura:
+        session.delete(factura)
+        session.commit()
+        print(f"Factura con ID {factura_id} eliminada exitosamente.")
+    else:
+        print(f"No se encontró la factura con ID {factura_id}")
+        
+def muestra_salones():
+    salones = session.query(Salone).all()
+    for salon in salones:
+        print(salon.id_salon, salon.nombre, salon.capacidad)
+
+def muestra_salon_por_id(salon_id):
+    salon = session.get(Salone, salon_id)
+    if salon:
+        print(salon.id_salon, salon.nombre, salon.capacidad)
+    else:
+        print(f"No se encontró el salón con ID {salon_id}")
+
+def agrega_salon(nombre, capacidad):
+    nuevo_salon = Salone(nombre=nombre, capacidad=capacidad)
+    session.add(nuevo_salon)
+    session.commit()
+    print(f"Salón {nombre} agregado exitosamente.")
+
+def actualiza_salon(salon_id, nombre=None, capacidad=None):
+    salon = session.get(Salone, salon_id)
+    if salon:
+        if nombre:
+            salon.nombre = nombre
+        if capacidad:
+            salon.capacidad = capacidad
+        session.commit()
+        print(f"Salón con ID {salon_id} actualizado exitosamente.")
+    else:
+        print(f"No se encontró el salón con ID {salon_id}")
+
+def elimina_salon(salon_id):
+    salon = session.get(Salone, salon_id)
+    if salon:
+        session.delete(salon)
+        session.commit()
+        print(f"Salón con ID {salon_id} eliminado exitosamente.")
+    else:
+        print(f"No se encontró el salón con ID {salon_id}")
 
 if __name__ == "__main__":
    # muestra_clientes()
